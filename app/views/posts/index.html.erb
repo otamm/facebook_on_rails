@@ -1,6 +1,7 @@
+<div class = "container">
 <h1>Listing posts</h1>
 
-<table>
+<table class = "table">
   <thead>
     <tr>
       <th>Title</th>
@@ -14,8 +15,8 @@
       <tr>
         <td><%= post.title %></td>
         <td><%= post.body %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Show', post %>  </td>
+        <td><%= link_to 'Edit', edit_post_path(post) %>  </td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -24,4 +25,5 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path %>
+<%= link_to 'New Post', new_post_path, class: "btn btn-primary btn-lg" %>
+</div>
