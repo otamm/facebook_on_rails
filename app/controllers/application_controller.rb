@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
 
-  def configute_permitted_parameters
+  def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u|
       u.permit(
         :email,
@@ -24,5 +24,5 @@ class ApplicationController < ActionController::Base
       )
     end
   end
-  
+
 end
