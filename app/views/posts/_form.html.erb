@@ -2,12 +2,12 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :body %>
+    <%= f.input :title, input_html: {class: 'form-control'}, label: false, placeholder: "Title" %>
+    <%= f.input :body, input_html: {class: 'form-control'}, label: false, placeholder: "(Useless) Content" %>
     <%= f.input :user_id %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
