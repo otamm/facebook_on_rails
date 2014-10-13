@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
     find_by_auth_hash(auth_hash) || create_from_auth_hash(auth_hash)
   end
 
+  def facebook
+    @facebook ||= Koala::Facebook::API.new(oauth_token)
+  end
+
   def self.find_by_auth_hash(auth_hash)
     where(
       provider: auth_hash.provider,
