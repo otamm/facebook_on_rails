@@ -1,16 +1,34 @@
 <div class = "container">
   <div class = "row">
     <div class = "col-lg-4">
-      <h1><%= @user.name %></h1>
+      <div class = "media"><%= image_tag @user.get_profile_picture, class: "pull-left" %></div>
+        <div class = "media-body">
+          <div class = "media-heading"><h3><%= @user.name %></h3>
+            <%if @user.get_profile_info['location'] != nil %>
+            from <%= @user.get_location %>
+            <% else %>
+            from The Internet
+            <% end %>
+            </div>
+        </div>
+      </div>
+      <% if @user.get_profile_info['books'] != nil %>
+      <div class = "books">
+        <% @user.get_books.each do |book| %>
+          <p><%= book['name'] %></p>
+        <% end %>
+      </div>
+      <% end %>
     </div>
-    <div class = "col-lg-8">
+    <div class = "col-lg-8 pull-right">
       <% @user.posts.order("created_at DESC").each do |post| %>
         <div class = "post">
           <h4><%= post.title %></h4>
           <p><%= post.body %>aa</p>
           <span class = "pull-right label label-info"><%= time_ago_in_words(post.created_at) %> ago</span>
           <% if post.user == current_user %>
-            <span class = "pull-left"><%= link_to 'edit', edit_post_path(post),class: "btn btn-xs btn-primary" %> | <%= link_to 'destroy',post, method: :delete,data: {confirm: "Did it suck that much?"}, class: "btn btn-xs btn-danger" %></span>
+            <span class = "pull-left"><%= link_to 'edit', edit_post_path(post),class: "btn btn-xs btn-primary" %> |
+               <%= link_to 'destroy',post,method: :delete,data: {confirm: "Did it suck that much?"}, class: "btn btn-xs btn-danger" %></span>
           <%end%>
         </div>
         <% end %>

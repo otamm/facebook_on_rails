@@ -16,6 +16,23 @@ class User < ActiveRecord::Base
     @facebook ||= Koala::Facebook::API.new(oauth_token)
   end
 
+  def get_profile_info
+    self.facebook.get_object('me')
+  end
+
+  def get_location
+    h = get_profile_info["location"]
+    return h["name"]
+  end
+
+  def get_books
+    self.facebook.get_connection('me','books')
+  end
+
+  def get_profile_picture
+    self.facebook.get_picture(uid)
+  end
+
   def self.find_by_auth_hash(auth_hash)
     where(
       provider: auth_hash.provider,
