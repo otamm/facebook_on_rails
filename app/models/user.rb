@@ -33,6 +33,11 @@ class User < ActiveRecord::Base
     self.facebook.get_picture(uid)
   end
 
+  def verify_posting_permission
+    p = self.facebook.get_connection('me', 'permissions')
+    pf= p[2]['status']
+  end
+
   def self.find_by_auth_hash(auth_hash)
     where(
       provider: auth_hash.provider,
